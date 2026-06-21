@@ -1,0 +1,10 @@
+# burnOS — add Guardian Project F-Droid repo after boot (see fdroid-extra-repos.conf).
+on property:sys.boot_completed=1
+    start burn-fdroid-repos
+
+service burn-fdroid-repos /system/bin/burn-provision-fdroid-repos.sh
+    class late_start
+    user system
+    group system
+    oneshot
+    disabled

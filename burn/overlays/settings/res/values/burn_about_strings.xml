@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- burnOS — About phone use and liability notice -->
+<resources>
+    <string name="burn_os_product_name">burnOS</string>
+    <string name="burn_os_tagline">Privacy &amp; security</string>
+    <string name="burn_use_liability_title">Use &amp; liability</string>
+    <string name="burn_use_liability_summary">No emergency calls. Do not store irreplaceable data. This device may destroy data if tampered with.</string>
+    <string name="burn_use_liability_notice_title">Important</string>
+    <string name="burn_use_liability_full">burnOS USE AND LIABILITY NOTICE\n\nThis device is provided for specific operational use only. By using this device, you accept the following terms.\n\nEMERGENCY CALLS\nThis device cannot place emergency calls (including 999, 911, 112, or equivalent). Do not rely on this device for emergency communication or personal safety.\n\nDATA AND STORAGE\nDo not store documents, credentials, keys, wallets, or any data on this device that you cannot afford to lose. You are solely responsible for keeping copies of anything important elsewhere. We accept no liability for lost, corrupted, or inaccessible data.\n\nANTI-TAMPER PROTECTION\nThis device is built to permanently destroy or irrecoverably wipe stored data when tampering, unauthorized modification, or integrity violations are detected. This may occur without warning.\n\nLIMITATION OF LIABILITY\nburnOS and burn.tel provide this software and device configuration \"as is\" without warranty. To the fullest extent permitted by law, we disclaim liability for personal injury, property damage, data loss, service interruption, or any damages arising from use or inability to use this device, including failure to reach emergency services.\n\nIf you do not accept these terms, do not use this device.</string>
+</resources>

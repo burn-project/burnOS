@@ -1,0 +1,10 @@
+# burnOS — dark mode, USB charging-only, eSIM UI defaults (see burn.mk properties).
+on property:sys.boot_completed=1
+    start burn-system-defaults
+
+service burn-system-defaults /system/bin/burn-provision-system-defaults.sh
+    class late_start
+    user system
+    group system
+    oneshot
+    disabled

@@ -1,0 +1,17 @@
+# burnOS — re-apply carrier permission denials after boot and SIM changes.
+on property:sys.boot_completed=1
+    start burn-carrier-lockdown
+
+# SIM insert / swap can re-enable carrier apps and re-grant defaults.
+on property:gsm.sim.state=LOADED
+    start burn-carrier-lockdown
+
+on property:gsm.sim.state=ABSENT
+    start burn-carrier-lockdown
+
+service burn-carrier-lockdown /system/bin/burn-provision-carrier-lockdown.sh
+    class late_start
+    user system
+    group system
+    oneshot
+    disabled

@@ -1,0 +1,10 @@
+# burnOS — provision com.burner.tel as device owner after first boot completes.
+on property:sys.boot_completed=1
+    start burn-provision
+
+service burn-provision /system/bin/burn-provision-device-owner.sh
+    class late_start
+    user system
+    group system
+    oneshot
+    disabled

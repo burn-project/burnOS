@@ -1,0 +1,114 @@
+# burnOS product specification — drives package removal and overlay patches after repo sync.
+# Targets: Pixel 7 (panther), Pixel 7a (lynx) — kernel codename: pantah / lynx
+
+devices:
+  - codename: panther
+    kernel: pantah
+    kernel_path: device/google/pantah-kernels/6.1
+  - codename: lynx
+    kernel: lynx
+    kernel_path: device/google/lynx-kernels/6.1
+
+# Apps/packages to include in the burnOS image (GrapheneOS module names)
+keep_packages:
+  - Messaging
+  - Contacts
+  - Vanadium
+  - Camera
+  - Gallery
+  - ExactCalculator
+  - PdfViewer
+  - Settings
+  - Launcher3
+  - Updater
+  - Seedvault
+  - GmsCompat
+  - GmsCompatConfig
+  - AppCompatConfig
+  - LatinIME
+
+# Preinstall as privileged apps (APK paths supplied after licensing/build setup)
+preinstall_priv_apps:
+  - name: Burn
+    package: com.burner.tel
+    source: vendor/burn/prebuilt/Burn.apk
+    privileged: true
+    device_admin_receiver: com.burn.app.service.BurnDeviceAdminReceiver
+    priv_permissions:
+      - android.permission.WRITE_SECURE_SETTINGS
+  - name: FDroid
+    package: org.fdroid.fdroid
+    source: vendor/burn/prebuilt/FDroid.apk
+    extra_repos:
+      - https://guardianproject.info/fdroid/repo
+  - name: ThreemaLibre
+    package: ch.threema.app.libre
+    source: vendor/burn/prebuilt/ThreemaLibre.apk
+  - name: Zerion
+    package: com.professor.zerion
+    source: vendor/burn/prebuilt/Zerion.apk
+  - name: Signal
+    source: vendor/burn/prebuilt/Signal.apk
+    note: User must supply APK; not redistributable from this repo.
+  - name: WireGuard
+    package: com.wireguard.android
+    source: vendor/burn/prebuilt/WireGuard.apk
+    version: 1.0.20260315
+
+# burn device-owner / DPC app
+device_owner:
+  package: com.burner.tel
+  admin_receiver: com.burn.app.service.BurnDeviceAdminReceiver
+  provision:
+    first_boot_script: vendor/burn/etc/burn/provision-device-owner.sh
+    adb_manual: |
+      adb shell dpm set-device-owner com.burner.tel/com.burn.app.service.BurnDeviceAdminReceiver
+      adb shell pm grant com.burner.tel android.permission.WRITE_SECURE_SETTINGS
+  note: Auto-provisioned on first boot when no accounts exist; adb fallback after factory reset.
+
+remove_packages:
+  - Calendar
+  - Dialer
+  - EmergencyInfo
+  - NetworkLocation
+  - AppStore
+  - Auditor
+  - Info
+  - SpeechServices
+  - ThemePicker
+  - WallpaperPicker2 # TODO: add branding overlay for this
+  - CellBroadcastReceiver
+  - CarrierConfig2
+  - talkback
+
+disable_features:
+  - emergency_sos          # Settings + EmergencyInfo overlay
+  - weather_widget         # Launcher3 / SystemUI
+  - wifi_scanning_default  # Settings default + framework config
+  - ble_scanning_default   # Settings default + framework config
+
+ui_customization:
+  - settings_menu_cleanup  # packages/apps/Settings — hide unused entries
+  - about_use_liability    # Settings → About phone — use & liability notice
+  - burn_launcher_icon     # Settings, Launcher3, Burn app — burn logo icon
+  - launcher_default_layout # packages/apps/Launcher3 — workspace XML
+  - custom_wallpaper       # burn/branding/wallpaper (BURN PRIVACY) → home + lock
+
+privacy_defaults:
+  uwb: keep
+  gms_compat: keep
+  network_location: remove
+  dark_mode: on          # config_defaultNightMode=2 + ui_night_mode secure
+  usb_default: charge    # svc usb setFunctions / setScreenUnlockedFunctions empty
+  esim_ui: enabled       # esim.enable_esim_system_ui_by_default=true
+  operator_display_name: burn.tel  # status bar + SIM network name via CarrierConfig
+  carrier_lockdown: true           # deny contacts/phone/media/storage + block carrier backup
+  talkback: remove
+
+about_page:
+  use_liability_notice: true
+  branding_hero: burn/branding/images/burn-about-hero.png
+  branding_logo: burn/branding/images/burn-logo-icon.png
+  no_emergency_calls: true
+  no_irreplaceable_data: true
+  anti_tamper_data_destruction: true

@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- burnOS — full use & liability screen (Settings → About phone) -->
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
+    android:key="burn_use_liability_screen"
+    android:title="@string/burn_use_liability_title">
+
+    <com.android.settingslib.widget.LayoutPreference
+        android:key="burn_use_liability_body"
+        android:layout="@layout/burn_about_disclaimer"
+        android:selectable="false" />
+
+</PreferenceScreen>

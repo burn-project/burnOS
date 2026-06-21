@@ -1,0 +1,69 @@
+# burnOS menu and UI customization spec (applied by burn/apply-overlays.sh)
+# Targets GrapheneOS 16-qpr2 — Pixel 7 (panther) / 7a (lynx)
+
+settings:
+  # Bool overrides merged into packages/apps/Settings/res/values/burn_config.xml
+  bools:
+    config_show_emergency_settings: false
+    config_show_emergency_gesture_settings: false
+    config_show_emergency_info_in_device_info: false
+
+  # Preference android:key values removed from XML (block-level strip)
+  remove_top_level_keys:
+    - top_level_emergency
+    - top_level_wallpaper      # WallpaperPicker2 removed; branding overlay only
+
+  remove_location_service_keys:
+    - location_services_network_location  # NetworkLocation package removed
+
+launcher:
+  # Replace default workspace layouts (panther / lynx grid sizes)
+  workspace_files:
+    - res/xml/default_workspace_5x5.xml
+    - res/xml/default_workspace_6x5.xml
+
+  hotseat:
+    - signal
+    - threema
+    - settings
+    - vanadium
+    - camera
+
+  first_screen_apps:
+    - signal
+    - threema_libre
+    - fdroid
+    - zerion
+    - contacts
+    - messaging
+    - vanadium
+    - camera
+    - gallery
+    - calculator
+    - clock
+    - pdf
+
+features:
+  # GrapheneOS already ships these off by default; overlays verify, do not weaken.
+  wifi_scan_always_available: 0   # Settings.Global.WIFI_SCAN_ALWAYS_AVAILABLE
+  ble_scan_always_available: 0    # enforced via burn_config + first-boot hook if needed
+  weather_widget: disable           # placeholder — refine when Launcher3/SystemUI sync completes
+
+system_defaults:
+  dark_mode: true                   # frameworks overlay + provision script
+  usb_charging_only: true           # no MTP/PTP by default when USB connected
+  esim_ui_enabled: true             # product property esim.enable_esim_system_ui_by_default
+  operator_name: burn.tel           # CarrierConfig vendor.xml override
+  carrier_lockdown: true            # provision + framework patch; deny carrier data access
+  talkback: removed
+
+about_page:
+  use_liability: true
+  branding:
+    hero: burn/branding/images/burn-about-hero.png
+    logo: burn/branding/images/burn-logo-icon.png
+    launcher_icon: burn/branding/icons/   # Settings, Launcher3, Burn RRO
+  warnings:
+    - no_emergency_calls      # 999 / 911 / 112 not available
+    - no_irreplaceable_data   # do not store data you cannot lose
+    - anti_tamper_data_burn   # device wipes/destroys data when tampered

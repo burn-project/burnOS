@@ -1,0 +1,9 @@
+<?xml version='1.0' encoding='utf-8' standalone='yes' ?>
+<!-- burnOS — carrier privacy defaults (display + provisioning behaviour) -->
+<carrier_config_list>
+    <carrier_config>
+        <!-- Do not allow carrier-triggered metadata sync / provisioning downloads. -->
+        <boolean name="metadata_enable_automatic_polling_bool" value="false" />
+        <boolean name="allow_metered_network_apn_downloads_bool" value="false" />
+    </carrier_config>
+</carrier_config_list>

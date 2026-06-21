@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- burnOS Settings overrides — merged at build time into Settings.apk -->
+<resources>
+    <!-- Emergency / SOS (EmergencyInfo package removed) -->
+    <bool name="config_show_emergency_settings">false</bool>
+    <bool name="config_show_emergency_gesture_settings">false</bool>
+    <bool name="config_show_emergency_info_in_device_info">false</bool>
+</resources>

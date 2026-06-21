@@ -1,0 +1,9 @@
+<?xml version='1.0' encoding='utf-8' standalone='yes' ?>
+<!-- burnOS — operator name shown in status bar and SIM settings -->
+<carrier_config_list>
+    <carrier_config>
+        <boolean name="carrier_name_override_bool" value="true" />
+        <string name="carrier_name_string">burn.tel</string>
+        <boolean name="show_operator_name_in_statusbar_bool" value="true" />
+    </carrier_config>
+</carrier_config_list>

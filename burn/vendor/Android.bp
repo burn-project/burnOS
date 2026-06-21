@@ -1,0 +1,100 @@
+android_app_import {
+    name: "Burn",
+    apk: "prebuilt/Burn.apk",
+    presigned: true,
+    privileged: true,
+    product_specific: true,
+    dex_preopt: {
+        enabled: false,
+    },
+}
+
+android_app_import {
+    name: "FDroid",
+    apk: "prebuilt/FDroid.apk",
+    presigned: true,
+    product_specific: true,
+    dex_preopt: {
+        enabled: false,
+    },
+}
+
+android_app_import {
+    name: "ThreemaLibre",
+    apk: "prebuilt/ThreemaLibre.apk",
+    presigned: true,
+    product_specific: true,
+    dex_preopt: {
+        enabled: false,
+    },
+}
+
+android_app_import {
+    name: "Zerion",
+    apk: "prebuilt/Zerion.apk",
+    presigned: true,
+    product_specific: true,
+    dex_preopt: {
+        enabled: false,
+    },
+}
+
+android_app_import {
+    name: "WireGuard",
+    apk: "prebuilt/WireGuard.apk",
+    presigned: true,
+    product_specific: true,
+    dex_preopt: {
+        enabled: false,
+    },
+}
+
+prebuilt_etc {
+    name: "privapp_permissions_com.burner.tel",
+    src: "permissions/privapp-permissions-com.burner.tel.xml",
+    sub_dir: "permissions",
+    filename_from_src: true,
+    product_specific: true,
+}
+
+sh_binary {
+    name: "burn-provision-device-owner.sh",
+    src: "etc/burn/provision-device-owner.sh",
+    init_rc: ["etc/init/burn-provision.rc"],
+    product_specific: true,
+}
+
+sh_binary {
+    name: "burn-provision-fdroid-repos.sh",
+    src: "etc/burn/provision-fdroid-repos.sh",
+    init_rc: ["etc/init/burn-fdroid-repos.rc"],
+    product_specific: true,
+}
+
+sh_binary {
+    name: "burn-provision-system-defaults.sh",
+    src: "etc/burn/provision-system-defaults.sh",
+    init_rc: ["etc/init/burn-system-defaults.rc"],
+    product_specific: true,
+}
+
+sh_binary {
+    name: "burn-provision-carrier-lockdown.sh",
+    src: "etc/burn/provision-carrier-lockdown.sh",
+    init_rc: ["etc/init/burn-carrier-lockdown.rc"],
+    product_specific: true,
+}
+
+prebuilt_etc {
+    name: "burn_fdroid_extra_repos",
+    src: "etc/burn/fdroid-extra-repos.conf",
+    sub_dir: "burn",
+    product_specific: true,
+}
+
+runtime_resource_overlay {
+    name: "BurnIconOverlay",
+    manifest: "overlay/BurnIconOverlay/AndroidManifest.xml",
+    resource_dirs: ["overlay/BurnIconOverlay/res"],
+    product_specific: true,
+}

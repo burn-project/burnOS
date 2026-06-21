@@ -1,0 +1,161 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- burnOS default workspace — 5x5 grid (Pixel 7 class). Applied over Launcher3 default. -->
+<favorites xmlns:launcher="http://schemas.android.com/apk/res-auto/com.android.launcher3">
+
+    <!-- Hotseat: Signal, Threema, Settings, Vanadium, Camera -->
+    <favorite
+        launcher:container="-101"
+        launcher:screen="0"
+        launcher:x="0"
+        launcher:y="0"
+        launcher:packageName="org.thoughtcrime.securesms"
+        launcher:className="org.thoughtcrime.securesms.RoutingActivity" />
+
+    <favorite
+        launcher:container="-101"
+        launcher:screen="1"
+        launcher:x="1"
+        launcher:y="0"
+        launcher:packageName="ch.threema.app.libre"
+        launcher:className="ch.threema.app.activities.MainActivity" />
+
+    <favorite
+        launcher:container="-101"
+        launcher:screen="2"
+        launcher:x="2"
+        launcher:y="0"
+        launcher:uri="#Intent;action=android.settings.SETTINGS;end" />
+
+    <favorite
+        launcher:container="-101"
+        launcher:screen="3"
+        launcher:x="3"
+        launcher:y="0"
+        launcher:packageName="app.vanadium.browser"
+        launcher:className="org.chromium.chrome.browser.ChromeTabbedActivity" />
+
+    <resolve
+        launcher:container="-101"
+        launcher:screen="4"
+        launcher:x="4"
+        launcher:y="0">
+        <favorite launcher:uri="#Intent;action=android.media.action.STILL_IMAGE_CAMERA;end" />
+        <favorite launcher:uri="#Intent;action=android.intent.action.CAMERA_BUTTON;end" />
+    </resolve>
+
+    <!-- Row 1: core burn apps -->
+    <favorite
+        launcher:screen="0"
+        launcher:x="0"
+        launcher:y="0"
+        launcher:packageName="org.thoughtcrime.securesms"
+        launcher:className="org.thoughtcrime.securesms.RoutingActivity" />
+
+    <favorite
+        launcher:screen="0"
+        launcher:x="1"
+        launcher:y="0"
+        launcher:packageName="ch.threema.app.libre"
+        launcher:className="ch.threema.app.activities.MainActivity" />
+
+    <favorite
+        launcher:screen="0"
+        launcher:x="2"
+        launcher:y="0"
+        launcher:packageName="com.android.contacts"
+        launcher:className="com.android.contacts.activities.PeopleActivity" />
+
+    <resolve
+        launcher:screen="0"
+        launcher:x="3"
+        launcher:y="0">
+        <favorite launcher:uri="#Intent;action=android.intent.action.MAIN;category=android.intent.category.APP_MESSAGING;end" />
+    </resolve>
+
+    <favorite
+        launcher:screen="0"
+        launcher:x="4"
+        launcher:y="0"
+        launcher:packageName="app.vanadium.browser"
+        launcher:className="org.chromium.chrome.browser.ChromeTabbedActivity" />
+
+    <!-- Row 2: media + utilities -->
+    <resolve
+        launcher:screen="0"
+        launcher:x="0"
+        launcher:y="1">
+        <favorite launcher:uri="#Intent;action=android.media.action.STILL_IMAGE_CAMERA;end" />
+    </resolve>
+
+    <resolve
+        launcher:screen="0"
+        launcher:x="1"
+        launcher:y="1">
+        <favorite launcher:uri="#Intent;action=android.intent.action.MAIN;category=android.intent.category.APP_GALLERY;end" />
+    </resolve>
+
+    <favorite
+        launcher:screen="0"
+        launcher:x="2"
+        launcher:y="1"
+        launcher:packageName="com.android.calculator2"
+        launcher:className="com.android.calculator2.Calculator" />
+
+    <favorite
+        launcher:screen="0"
+        launcher:x="3"
+        launcher:y="1"
+        launcher:packageName="com.android.deskclock"
+        launcher:className="com.android.deskclock.DeskClock" />
+
+    <resolve
+        launcher:screen="0"
+        launcher:x="4"
+        launcher:y="1">
+        <favorite launcher:uri="#Intent;action=android.intent.action.VIEW;type=application/pdf;end" />
+    </resolve>
+
+    <!-- Row 3: store + burn stack -->
+    <favorite
+        launcher:screen="0"
+        launcher:x="0"
+        launcher:y="2"
+        launcher:packageName="org.fdroid.fdroid"
+        launcher:className="org.fdroid.fdroid.views.main.MainActivity" />
+
+    <favorite
+        launcher:screen="0"
+        launcher:x="1"
+        launcher:y="2"
+        launcher:packageName="com.professor.zerion"
+        launcher:className="com.professor.zerion.android.splash.SplashScreenActivity" />
+
+    <favorite
+        launcher:screen="0"
+        launcher:x="2"
+        launcher:y="2"
+        launcher:packageName="com.burner.tel"
+        launcher:className="com.burn.app.MainActivity" />
+
+    <favorite
+        launcher:screen="0"
+        launcher:x="3"
+        launcher:y="2"
+        launcher:uri="#Intent;action=android.settings.SETTINGS;end" />
+
+    <favorite
+        launcher:screen="0"
+        launcher:x="4"
+        launcher:y="2"
+        launcher:packageName="app.seamlessupdate.client"
+        launcher:className="app.seamlessupdate.client.Settings" />
+
+    <!-- Row 4: VPN -->
+    <favorite
+        launcher:screen="0"
+        launcher:x="0"
+        launcher:y="3"
+        launcher:packageName="com.wireguard.android"
+        launcher:className="com.wireguard.android.activity.MainActivity" />
+
+</favorites>

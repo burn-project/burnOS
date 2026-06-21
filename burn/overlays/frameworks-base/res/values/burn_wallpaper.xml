@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- burnOS — same wallpaper on home + lock screen -->
+<resources>
+    <item name="default_lock_wallpaper" type="drawable">@drawable/default_wallpaper</item>
+</resources>
