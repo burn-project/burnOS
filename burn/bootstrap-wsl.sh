@@ -3,6 +3,8 @@
 # Requires ~300 GiB free disk INSIDE the Linux filesystem (not /mnt/c).
 set -euo pipefail
 
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+
 BURNOS_MANIFEST="${BURNOS_MANIFEST:-$HOME/burnOS-src/.repo/manifests}"
 SYNC_DIR="${SYNC_DIR:-$HOME/burnOS-src}"
 BRANCH="${BRANCH:-16-qpr2}"
@@ -43,7 +45,7 @@ repo sync -j"$(nproc)" -c --no-tags --no-clone-bundle
 echo ""
 echo "==> Source sync complete."
 echo "    Next: apply burnOS menu/UI overlays, then build for panther or lynx:"
-echo "      bash /mnt/c/adb/burnOS/burn/apply-overlays.sh"
+echo "      bash \"$SCRIPT_DIR/apply-overlays.sh\""
 echo "      source build/envsetup.sh"
 echo "      lunch aosp_panther-bp2a-userrelease   # Pixel 7"
 echo "      lunch aosp_lynx-bp2a-userrelease      # Pixel 7a"

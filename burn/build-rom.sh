@@ -2,8 +2,9 @@
 # burnOS ROM build — panther (Pixel 7). Run inside Ubuntu WSL.
 set -euo pipefail
 
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 SYNC_DIR="${SYNC_DIR:-/root/burnOS-src}"
-BURN_DIR="${BURN_DIR:-/mnt/c/adb/burnOS/burn}"
+BURN_DIR="${BURN_DIR:-$SCRIPT_DIR}"
 LOG_DIR="${LOG_DIR:-/root/burnOS-logs}"
 DEVICE="${DEVICE:-panther}"
 JOBS="${JOBS:-10}"
