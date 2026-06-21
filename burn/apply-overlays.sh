@@ -141,7 +141,7 @@ fi
 
 FRAMEWORK_DEFAULTS="$SYNC_DIR/frameworks/base/packages/SettingsProvider/res/values/defaults.xml"
 if [[ -f "$FRAMEWORK_DEFAULTS" ]]; then
-  if grep -q 'def_wifi_scan_always_available">0<' "$FRAMEWORK_DEFAULTS"; then
+  if grep -qE 'def_wifi_scan_always_available">0</' "$FRAMEWORK_DEFAULTS"; then
     echo "==> Wi-Fi scan default already off (GrapheneOS baseline)"
   else
     echo "WARN: def_wifi_scan_always_available is not 0 — review $FRAMEWORK_DEFAULTS"
