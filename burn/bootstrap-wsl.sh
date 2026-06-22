@@ -1,6 +1,7 @@
 #!/usr/bin/env bash
 # burnOS WSL bootstrap — run inside Ubuntu 24.04 (WSL2) or compatible Debian/Ubuntu.
 # Requires ~300 GiB free disk INSIDE the Linux filesystem (not /mnt/c).
+# Usage: bootstrap-wsl.sh [--fast]   (--fast adds --optimized-fetch to repo sync)
 set -euo pipefail
 
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
@@ -9,6 +10,27 @@ BURNOS_MANIFEST="${BURNOS_MANIFEST:-$HOME/burnOS-src/.repo/manifests}"
 SYNC_DIR="${SYNC_DIR:-$HOME/burnOS-src}"
 BRANCH="${BRANCH:-16-qpr2}"
 MANIFEST_URL="${MANIFEST_URL:-https://github.com/burn-project/burnOS.git}"
+FAST="${FAST:-0}"
+
+for arg in "$@"; do
+  case "$arg" in
+    --fast) FAST=1 ;;
+    -h|--help)
+      echo "Usage: $(basename "$0") [--fast]"
+      echo "  --fast  Use --optimized-fetch for faster repo sync"
+      exit 0
+      ;;
+    *)
+      echo "Unknown option: $arg (try --help)" >&2
+      exit 1
+      ;;
+  esac
+done
+
+REPO_SYNC_FLAGS=(-j"$(nproc)" -c --no-tags --no-clone-bundle)
+if [[ "$FAST" == 1 ]]; then
+  REPO_SYNC_FLAGS+=(--optimized-fetch)
+fi
 
 echo "==> burnOS bootstrap"
 echo "    sync dir: $SYNC_DIR"
@@ -40,12 +62,13 @@ if [[ ! -d .repo ]]; then
   repo init -u "$MANIFEST_URL" -b "$BRANCH"
 fi
 
-repo sync -j"$(nproc)" -c --no-tags --no-clone-bundle
+repo sync "${REPO_SYNC_FLAGS[@]}"
 
 echo ""
 echo "==> Source sync complete."
 echo "    Next: apply burnOS menu/UI overlays, then build for panther or lynx:"
 echo "      bash \"$SCRIPT_DIR/apply-overlays.sh\""
+echo "      bash \"$SCRIPT_DIR/build-rom.sh\"              # full build (or manual steps below)"
 echo "      source build/envsetup.sh"
 echo "      lunch aosp_panther-bp2a-userrelease   # Pixel 7"
 echo "      lunch aosp_lynx-bp2a-userrelease      # Pixel 7a"
