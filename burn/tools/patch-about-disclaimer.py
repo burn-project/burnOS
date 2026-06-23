@@ -7,7 +7,6 @@ from pathlib import Path
 
 LIABILITY_MARKER = 'android:key="burn_use_liability"'
 BRANDING_MARKER = 'android:key="burn_about_branding"'
-LEGAL_BRANDING_MARKER = 'android:key="burn_legal_branding"'
 
 MY_DEVICE_BRANDING = """
     <com.android.settingslib.widget.LayoutPreference
@@ -26,14 +25,6 @@ MY_DEVICE_PREF = """        <!-- burnOS use & liability -->
             android:fragment="com.android.settings.deviceinfo.aboutphone.BurnUseLiabilityFragment"/>
 """
 
-ABOUT_LEGAL_BRANDING = """
-    <com.android.settingslib.widget.LayoutPreference
-        android:key="burn_legal_branding"
-        android:layout="@layout/burn_legal_header"
-        android:order="1"
-        android:selectable="false" />
-"""
-
 ABOUT_LEGAL_PREF = """    <!-- burnOS use & liability -->
     <Preference
         android:key="burn_use_liability"
@@ -43,6 +34,24 @@ ABOUT_LEGAL_PREF = """    <!-- burnOS use & liability -->
         android:fragment="com.android.settings.deviceinfo.aboutphone.BurnUseLiabilityFragment" />
 
 """
+
+
+def remove_legal_branding(path: Path) -> bool:
+    text = path.read_text(encoding="utf-8")
+    start = text.find('android:key="burn_legal_branding"')
+    if start < 0:
+        return False
+    block_start = text.rfind("<com.android.settingslib.widget.LayoutPreference", 0, start)
+    if block_start < 0:
+        return False
+    block_end = text.find("/>", start)
+    if block_end < 0:
+        return False
+    block_end = text.find("\n", block_end) + 1
+    updated = text[:block_start] + text[block_end:]
+    path.write_text(updated, encoding="utf-8")
+    print(f"    removed legal branding header: {path}")
+    return True
 
 
 def patch_xml(path: Path, marker: str, insert_after: str, block: str, label: str) -> bool:
@@ -87,13 +96,7 @@ def main() -> None:
         )
 
     if about_legal.is_file():
-        patch_xml(
-            about_legal,
-            LEGAL_BRANDING_MARKER,
-            '                  android:title="@string/legal_information">',
-            ABOUT_LEGAL_BRANDING,
-            "about_legal branding header",
-        )
+        remove_legal_branding(about_legal)
         patch_xml(
             about_legal,
             LIABILITY_MARKER,

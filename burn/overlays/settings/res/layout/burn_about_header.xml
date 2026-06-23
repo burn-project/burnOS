@@ -19,14 +19,6 @@
         android:scaleType="fitCenter"
         android:src="@drawable/burn_about_hero" />
 
-    <ImageView
-        android:layout_width="112dp"
-        android:layout_height="112dp"
-        android:layout_marginTop="12dp"
-        android:contentDescription="@string/burn_os_tagline"
-        android:scaleType="fitCenter"
-        android:src="@drawable/burn_logo_icon" />
-
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

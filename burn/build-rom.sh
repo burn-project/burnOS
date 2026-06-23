@@ -122,7 +122,7 @@ export OFFICIAL_BUILD=true
 export USE_CCACHE=1
 command -v ccache >/dev/null && ccache -M 50G 2>/dev/null || true
 lunch "${DEVICE}-cur-user"
-m vendorbootimage vendorkernelbootimage target-files-package -j"$JOBS"
+m productimage systemimage systemextimage target-files-package -j"$JOBS"
 INNER
 
 chmod +x "$INNER_SCRIPT"

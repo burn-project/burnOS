@@ -15,28 +15,11 @@
         android:paddingEnd="24dp"
         android:paddingBottom="24dp">
 
-        <ImageView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:adjustViewBounds="true"
-            android:contentDescription="@string/burn_os_product_name"
-            android:maxHeight="160dp"
-            android:scaleType="fitCenter"
-            android:src="@drawable/burn_about_hero" />
-
-        <ImageView
-            android:layout_width="88dp"
-            android:layout_height="88dp"
-            android:layout_marginTop="12dp"
-            android:contentDescription="@string/burn_os_tagline"
-            android:scaleType="fitCenter"
-            android:src="@drawable/burn_logo_icon" />
-
         <TextView
             android:id="@+id/burn_disclaimer_text"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
+            android:layout_marginTop="8dp"
             android:lineSpacingMultiplier="1.25"
             android:text="@string/burn_use_liability_full"
             android:textAppearance="?android:attr/textAppearanceMedium" />

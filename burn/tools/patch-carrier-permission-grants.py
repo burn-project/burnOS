@@ -10,26 +10,46 @@ MARKER = "burnOS: skip carrier default permission grants"
 METHOD = "grantDefaultPermissionsToEnabledCarrierApps"
 
 
+def _find_method_span(text: str, method: str) -> tuple[int, int] | None:
+    pattern = re.compile(rf"public\s+void\s+{re.escape(method)}\s*\(")
+    match = pattern.search(text)
+    if not match:
+        return None
+
+    brace_start = text.find("{", match.end())
+    if brace_start < 0:
+        return None
+
+    depth = 0
+    for idx in range(brace_start, len(text)):
+        ch = text[idx]
+        if ch == "{":
+            depth += 1
+        elif ch == "}":
+            depth -= 1
+            if depth == 0:
+                return match.start(), idx + 1
+    return None
+
+
 def patch_file(path: Path) -> bool:
     text = path.read_text(encoding="utf-8")
-    if MARKER in text:
+    span = _find_method_span(text, METHOD)
+    if span is None:
+        raise SystemExit(f"method {METHOD} not found in {path}")
+
+    start, end = span
+    method_text = text[start:end]
+    if MARKER in method_text and "return;" not in method_text.split(MARKER, 1)[1]:
         print(f"    already patched: {path}")
         return False
 
-    pattern = re.compile(
-        rf"(public\s+void\s+{METHOD}\s*\([^)]*\)\s*\{{)",
-        re.MULTILINE,
-    )
-    match = pattern.search(text)
-    if not match:
-        raise SystemExit(f"method {METHOD} not found in {path}")
-
-    insert = (
-        f"{match.group(1)}\n"
+    replacement = (
+        f"public void {METHOD}(String[] packageNames, int userId) {{\n"
         f"        // {MARKER}\n"
-        f"        return;\n"
+        f"    }}"
     )
-    updated = text[: match.start()] + insert + text[match.end() :]
+    updated = text[:start] + replacement + text[end:]
     path.write_text(updated, encoding="utf-8")
     print(f"    patched carrier permission grants: {path}")
     return True

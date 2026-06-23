@@ -42,8 +42,8 @@ su - build -s /bin/bash -c "
   echo '==> lunch + compile'
   export OFFICIAL_BUILD=true USE_CCACHE=1
   command -v ccache >/dev/null && ccache -M 50G 2>/dev/null || true
-  lunch '${DEVICE}-cur-user'
-  m vendorbootimage vendorkernelbootimage target-files-package -j'$JOBS'
+  lunch \"${DEVICE}-cur-user\"
+  m vendorbootimage vendorkernelbootimage target-files-package -j\"${JOBS}\"
 " 2>&1 | tee -a "$LOG"
 
 log "pipeline finished — images: $SYNC_DIR/out/target/product/$DEVICE/"

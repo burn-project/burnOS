@@ -1,8 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!-- burnOS system defaults -->
-<resources>
-    <!-- 2 = UiModeManager.MODE_NIGHT_YES (dark mode) -->
-    <integer name="config_defaultNightMode">2</integer>
-    <!-- 1 = show mobile operator name in status bar by default -->
-    <integer name="config_showOperatorNameDefault">1</integer>
-</resources>

@@ -1,9 +1,9 @@
 android_app_import {
     name: "Burn",
     apk: "prebuilt/Burn.apk",
-    presigned: true,
     privileged: true,
     product_specific: true,
+    certificate: "platform",
     dex_preopt: {
         enabled: false,
     },
@@ -12,8 +12,8 @@ android_app_import {
 android_app_import {
     name: "FDroid",
     apk: "prebuilt/FDroid.apk",
-    presigned: true,
     product_specific: true,
+    certificate: "platform",
     dex_preopt: {
         enabled: false,
     },
@@ -22,8 +22,8 @@ android_app_import {
 android_app_import {
     name: "ThreemaLibre",
     apk: "prebuilt/ThreemaLibre.apk",
-    presigned: true,
     product_specific: true,
+    certificate: "platform",
     dex_preopt: {
         enabled: false,
     },
@@ -32,8 +32,8 @@ android_app_import {
 android_app_import {
     name: "Zerion",
     apk: "prebuilt/Zerion.apk",
-    presigned: true,
     product_specific: true,
+    certificate: "platform",
     dex_preopt: {
         enabled: false,
     },
@@ -42,8 +42,8 @@ android_app_import {
 android_app_import {
     name: "WireGuard",
     apk: "prebuilt/WireGuard.apk",
-    presigned: true,
     product_specific: true,
+    certificate: "platform",
     dex_preopt: {
         enabled: false,
     },

@@ -83,10 +83,9 @@ if [[ -d "$SETTINGS_DIR" ]]; then
     "$SETTINGS_DIR/res/layout/burn_about_disclaimer.xml"
   cp "$SCRIPT_DIR/overlays/settings/res/layout/burn_about_header.xml" \
     "$SETTINGS_DIR/res/layout/burn_about_header.xml"
-  cp "$SCRIPT_DIR/overlays/settings/res/layout/burn_legal_header.xml" \
-    "$SETTINGS_DIR/res/layout/burn_legal_header.xml"
-  cp "$SCRIPT_DIR/overlays/settings/res/drawable-nodpi/"*.png \
-    "$SETTINGS_DIR/res/drawable-nodpi/"
+  cp "$SCRIPT_DIR/branding/images/burn-about-hero.png" \
+    "$SETTINGS_DIR/res/drawable-nodpi/burn_about_hero.jpg"
+  rm -f "$SETTINGS_DIR/res/drawable-nodpi/burn_about_hero.png"
   cp "$SCRIPT_DIR/overlays/settings/res/xml/burn_about_use_liability.xml" \
     "$SETTINGS_DIR/res/xml/burn_about_use_liability.xml"
   mkdir -p "$SETTINGS_DIR/src/com/android/settings/deviceinfo/aboutphone"
@@ -119,14 +118,12 @@ if [[ -d "$FRAMEWORKS_RES" ]]; then
     "$FRAMEWORKS_RES/drawable-nodpi/default_wallpaper.png"
   cp "$SCRIPT_DIR/branding/wallpaper/default_lock_wallpaper.png" \
     "$FRAMEWORKS_RES/drawable-nodpi/default_lock_wallpaper.png"
-  cp "$SCRIPT_DIR/overlays/frameworks-base/res/values/burn_wallpaper.xml" \
-    "$FRAMEWORKS_RES/values/burn_wallpaper.xml"
-  cp "$SCRIPT_DIR/overlays/frameworks-base/res/values/burn_system_defaults.xml" \
-    "$FRAMEWORKS_RES/values/burn_system_defaults.xml"
+  rm -f "$FRAMEWORKS_RES/values/burn_wallpaper.xml" \
+        "$FRAMEWORKS_RES/values/burn_system_defaults.xml"
+  python3 "$SCRIPT_DIR/tools/patch-framework-config.py" "$SYNC_DIR"
   cp "$SCRIPT_DIR/overlays/frameworks-base/res/values/burn_carrier_privacy.xml" \
     "$FRAMEWORKS_RES/values/burn_carrier_privacy.xml"
-  echo "    dark mode default (config_defaultNightMode=2)"
-  echo "    carrier privacy overlay (empty preinstalled carrier app list)"
+  echo "    patched config.xml (dark mode, operator name, lock wallpaper)"
 else
   echo "==> frameworks/base not synced yet — skipping wallpaper"
 fi
