@@ -2,9 +2,8 @@
 setlocal EnableDelayedExpansion
 cd /d "%~dp0"
 
-:: burnOS — Pixel 7 (panther) factory flash script
-:: Run from the folder that contains the factory images (see burn/copy-to-downloads.sh).
-:: Requires fastboot >= 35.0.1 on PATH. Device must be in Fastboot mode with unlocked bootloader.
+:: burnOS — Pixel 7 (panther) signed factory flash script
+:: Requires signed release (burn/sign-release.sh) + avb_pkmd.bin in this folder.
 
 set DEVICE=panther
 set BUILD=2026062200
@@ -12,6 +11,7 @@ set MIN_FASTBOOT=350001
 set BOOTLOADER=bootloader-panther-cloudripper-16.4-14540572.img
 set RADIO=radio-panther-g5300q-251202-260127-B-14784800.img
 set IMAGE=image-panther-%BUILD%.zip
+set AVB_KEY=avb_pkmd.bin
 
 PATH=%PATH%;"%SYSTEMROOT%\System32"
 
@@ -37,21 +37,15 @@ if /i not "%product%"=="%DEVICE%" (
   call:pakExit
 )
 
-if not exist "%BOOTLOADER%" (
-  echo Missing %BOOTLOADER%
-  call:pakExit
-)
-if not exist "%RADIO%" (
-  echo Missing %RADIO%
-  call:pakExit
-)
-if not exist "%IMAGE%" (
-  echo Missing %IMAGE%
-  echo Prepare the flash bundle with: bash burn/copy-to-downloads.sh
+if not exist "%BOOTLOADER%" ( echo Missing %BOOTLOADER% & call:pakExit )
+if not exist "%RADIO%" ( echo Missing %RADIO% & call:pakExit )
+if not exist "%IMAGE%" ( echo Missing %IMAGE% & call:pakExit )
+if not exist "%AVB_KEY%" (
+  echo Missing %AVB_KEY% — run sign-release.sh and generate-flash-bundle.sh first
   call:pakExit
 )
 
-echo Flashing %DEVICE% burnOS build %BUILD% ...
+echo Flashing signed burnOS %DEVICE% build %BUILD% ...
 echo Do not unplug the device until this script finishes.
 
 fastboot flash --slot=other bootloader %BOOTLOADER%
@@ -72,8 +66,15 @@ fastboot -w --skip-reboot update %IMAGE%
 fastboot reboot-bootloader
 ping -n 5 127.0.0.1 >nul
 
+echo Installing burnOS verified boot public key...
+fastboot erase avb_custom_key
+fastboot flash avb_custom_key %AVB_KEY%
+fastboot reboot-bootloader
+ping -n 5 127.0.0.1 >nul
+
 echo.
-echo Flash complete. Lock the bootloader when ready: fastboot flashing lock
+echo Ready to lock. Run: fastboot flashing lock
+echo Keep OEM unlocking ENABLED in Developer options after locking.
 call:pakExit
 
 :pakExit

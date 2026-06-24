@@ -7,6 +7,7 @@ settings:
     config_show_emergency_settings: false
     config_show_emergency_gesture_settings: false
     config_show_emergency_info_in_device_info: false
+    config_show_top_level_connected_devices: false
 
   # Preference android:key values removed from XML (block-level strip)
   remove_top_level_keys:
@@ -39,7 +40,6 @@ launcher:
     - vanadium
     - camera
     - gallery
-    - calculator
     - clock
     - pdf
 

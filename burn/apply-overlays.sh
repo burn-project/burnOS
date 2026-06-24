@@ -94,6 +94,11 @@ if [[ -d "$SETTINGS_DIR" ]]; then
   python3 "$SCRIPT_DIR/tools/patch-about-disclaimer.py" "$SYNC_DIR"
   strip_from_file "$SETTINGS_DIR/res/xml/top_level_settings.xml" \
     "$SCRIPT_DIR/overlays/settings/remove_top_level_keys.txt"
+  strip_from_file "$SETTINGS_DIR/res/xml/top_level_settings_expressive.xml" \
+    "$SCRIPT_DIR/overlays/settings/remove_top_level_keys.txt"
+  if [[ -f "$SETTINGS_DIR/res/values/config.xml" ]]; then
+    sed -i 's/,AndroidHealthConnect//g' "$SETTINGS_DIR/res/values/config.xml"
+  fi
   strip_from_file "$SETTINGS_DIR/res/xml/location_services.xml" \
     "$SCRIPT_DIR/overlays/settings/remove_location_service_keys.txt"
 else

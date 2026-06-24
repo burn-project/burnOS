@@ -96,13 +96,6 @@
 
     <favorite
         launcher:screen="0"
-        launcher:x="2"
-        launcher:y="1"
-        launcher:packageName="com.android.calculator2"
-        launcher:className="com.android.calculator2.Calculator" />
-
-    <favorite
-        launcher:screen="0"
         launcher:x="3"
         launcher:y="1"
         launcher:packageName="com.android.deskclock"

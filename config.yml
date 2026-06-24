@@ -50,9 +50,6 @@ additional_projects:
     name: platform_external_AppCompatConfig
     groups: pdk-fs
     clone_depth: 1
-  - path: external/AppStore
-    name: platform_external_AppStore
-    clone_depth: 1
   - path: external/Auditor
     name: platform_external_Auditor
     clone_depth: 1
@@ -95,8 +92,6 @@ additional_projects:
   - path: packages/apps/DeskClock
     name: platform_packages_apps_DeskClock
     groups: pdk-fs
-  - path: packages/apps/ExactCalculator
-    name: platform_packages_apps_ExactCalculator
   - path: packages/apps/GmsCompat
     name: platform_packages_apps_GmsCompat
     groups: pdk-fs
@@ -167,7 +162,6 @@ forked_aosp_repos:
     - platform/packages/apps/Contacts
     - platform/packages/apps/Dialer
     - platform/packages/apps/DocumentsUI
-    - platform/packages/apps/EmergencyInfo
     - platform/packages/apps/Gallery2
     - platform/packages/apps/KeyChain
     - platform/packages/apps/Launcher3
@@ -227,6 +221,7 @@ clone_depth_1_aosp_repos:
   - platform/packages/apps/Car/RotaryImePrebuilt
   - platform/tools/deviceinfra/prebuilts
 removed_aosp_repos:
+  - platform/packages/apps/EmergencyInfo
   - device/google/atv
   - device/google/common/etm
   - device/google/contexthub

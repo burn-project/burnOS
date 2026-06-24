@@ -16,7 +16,6 @@ keep_packages:
   - Vanadium
   - Camera
   - Gallery
-  - ExactCalculator
   - PdfViewer
   - Settings
   - Launcher3
@@ -70,6 +69,7 @@ remove_packages:
   - Calendar
   - Dialer
   - EmergencyInfo
+  - ExactCalculator
   - NetworkLocation
   - AppStore
   - Auditor
@@ -83,6 +83,9 @@ remove_packages:
 
 disable_features:
   - emergency_sos          # Settings + EmergencyInfo overlay
+  - mms                      # MmsService excluded from product; SMS via Messaging kept
+  - health_connect_ui        # Safety Center entry hidden; module kept for build
+  - bluetooth_settings_ui    # Connected devices hidden; BT stack kept
   - weather_widget         # Launcher3 / SystemUI
   - wifi_scanning_default  # Settings default + framework config
   - ble_scanning_default   # Settings default + framework config

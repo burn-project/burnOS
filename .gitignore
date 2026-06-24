@@ -1,0 +1,10 @@
+# Release signing keys — never commit
+keys/
+*.pk8
+*.pem
+avb_pkmd.bin
+id_ed25519
+id_ed25519.pub
+
+# Local build outputs
+releases/

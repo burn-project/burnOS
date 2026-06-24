@@ -5,4 +5,6 @@
     <bool name="config_show_emergency_settings">false</bool>
     <bool name="config_show_emergency_gesture_settings">false</bool>
     <bool name="config_show_emergency_info_in_device_info">false</bool>
+    <!-- Bluetooth UI hidden; stack remains for build compatibility -->
+    <bool name="config_show_top_level_connected_devices">false</bool>
 </resources>

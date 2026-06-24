@@ -1,6 +1,11 @@
 # burnOS vendor additions — inherit from panther / lynx device.mk
 PRODUCT_PACKAGES -= \
-    talkback
+    talkback \
+    EmergencyInfo \
+    EmergencyInfo-lib \
+    ExactCalculator \
+    AppStore \
+    MmsService
 
 PRODUCT_PACKAGES += \
     Burn \
