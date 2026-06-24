@@ -60,7 +60,7 @@ system_defaults:
 about_page:
   use_liability: true
   branding:
-    hero: burn/branding/images/burn-about-hero.png
+    hero: burn/branding/images/burnos-header.png
     logo: burn/branding/images/burn-logo-icon.png
     launcher_icon: burn/branding/icons/   # Settings, Launcher3, Burn RRO
   warnings:

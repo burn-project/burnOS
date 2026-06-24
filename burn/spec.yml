@@ -110,7 +110,7 @@ privacy_defaults:
 
 about_page:
   use_liability_notice: true
-  branding_hero: burn/branding/images/burn-about-hero.png
+  branding_hero: burn/branding/images/burnos-header.png
   branding_logo: burn/branding/images/burn-logo-icon.png
   no_emergency_calls: true
   no_irreplaceable_data: true

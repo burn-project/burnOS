@@ -83,9 +83,9 @@ if [[ -d "$SETTINGS_DIR" ]]; then
     "$SETTINGS_DIR/res/layout/burn_about_disclaimer.xml"
   cp "$SCRIPT_DIR/overlays/settings/res/layout/burn_about_header.xml" \
     "$SETTINGS_DIR/res/layout/burn_about_header.xml"
-  cp "$SCRIPT_DIR/branding/images/burn-about-hero.png" \
-    "$SETTINGS_DIR/res/drawable-nodpi/burn_about_hero.jpg"
-  rm -f "$SETTINGS_DIR/res/drawable-nodpi/burn_about_hero.png"
+  cp "$SCRIPT_DIR/branding/images/burnos-header.png" \
+    "$SETTINGS_DIR/res/drawable-nodpi/burn_about_hero.png"
+  rm -f "$SETTINGS_DIR/res/drawable-nodpi/burn_about_hero.jpg"
   cp "$SCRIPT_DIR/overlays/settings/res/xml/burn_about_use_liability.xml" \
     "$SETTINGS_DIR/res/xml/burn_about_use_liability.xml"
   mkdir -p "$SETTINGS_DIR/src/com/android/settings/deviceinfo/aboutphone"
